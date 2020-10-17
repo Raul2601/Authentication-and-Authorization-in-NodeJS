@@ -1,0 +1,16 @@
+<table class="style">
+    <tr>
+        <th>Role Name</th>
+        <th>Permission Name</th>
+        <th>Action</th>
+        <th>Url</th>
+        <th></th>
+    </tr>
+    <tr *ngFor="let item of row; let i = index">
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td><input type="text"></td>
+        <td> <button (click)="deleteRow(i)"><i class="fa fa-trash"></i></button></td>
+    </tr>
+</table>
