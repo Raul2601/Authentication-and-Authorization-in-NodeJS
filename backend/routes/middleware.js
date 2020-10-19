@@ -5,11 +5,14 @@ exports.checkPermissions = async (req, res, next) => {
 
     if (req.session !== null) {
         if (req.session.passport == null || req.session.passport.user == null) {
-            res.redirect('/login');
+            res.status(404).redirect('/login');
         }
         else {
             let user = await findUser(req.session.passport.user);
             var resourceName = req.baseUrl;
+            if (user.role == null) {
+                return res.status(403).send({ error: 'access denied' });
+            }
             var permissions = user.role.permissions.filter(perm => {
                 return perm.url.includes(resourceName)
             });

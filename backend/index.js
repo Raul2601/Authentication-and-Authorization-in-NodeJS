@@ -3,8 +3,11 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const path = require('path');
+var cors = require('cors')
 
 const app = express()
+
+app.use(cors({ credentials: true, origin: 'http://localhost:8080' }));
 
 app.use(express.static(path.join(__dirname, '../frontend/dist/frontend')));
 
@@ -26,12 +29,6 @@ app.use(passport.session());
 // Passport config
 require('./config/passport')(passport);
 
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*")
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-  next()
-})
-
 // Connect to Mongo
 mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDb Connected...'))
@@ -42,11 +39,12 @@ db.set('debug', true);
 app.db = db;
 
 // Routes
-app.use('/users', require('./routes/users/index'));
-app.use('/roles', require('./routes/roles/index'));
+require('./routes/features/index')(app);
+require('./routes/roles/index')(app);
+require('./routes/users/index')(app);
 
 app.get('*', async (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend/dist/frontend', 'index.html'));
+  res.status(301).sendFile(path.resolve(__dirname, '../frontend/dist/frontend', 'index.html'));
 })
 
 const port = 3000

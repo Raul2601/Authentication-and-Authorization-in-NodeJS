@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RoleService } from '../role.service';
+import { RouteService } from '../route.service';
 
 @Component({
   selector: 'app-admin',
@@ -7,42 +9,80 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(private rolesService: RoleService, private routeService: RouteService) { }
+
+  roles: IRoles[] = [];
+
+  routes: string[] = [];
 
   ngOnInit(): void {
+
+    this.rolesService.getAllRoles()
+      .then((data) => {
+
+        if (data['roles'].length > 0) {
+          for (const role of data['roles']) {
+            let tempRole: IRoles = { id: '', name: '', permissions: [] };
+            tempRole.id = role._id;
+            tempRole.name = role.name;
+            for (const perm of role.permissions) {
+              let tempPerm: IPermission = { name: '', action: '', url: '' };
+              tempPerm.name = perm.name;
+              tempPerm.action = perm.action;
+              tempPerm.url = perm.url;
+              tempRole.permissions.push(tempPerm);
+            }
+            this.roles.push(tempRole);
+          }
+        }
+        else {
+          let tempRole: IRoles = { id: '', name: 'hr', permissions: [] };
+          let tempPerm: IPermission = { name: '', action: '', url: '' };
+          tempRole.permissions.push(tempPerm);
+          this.roles.push(tempRole);
+        }
+      });
+
+    this.routeService.getAllRoutes()
+      .then((data) => {
+        if (data['routes'].length > 0) {
+          this.routes = data['routes'];
+        }
+      })
   }
 
-  row = [
-    {
-      id: '',
-      name: '',
-      email: ''
-    },
-    {
-      id: '',
-      name: '',
-      email: ''
-    },
-    {
-      id: '',
-      name: '',
-      email: ''
-    }
-  ];
-
-  addTable() {
-    const obj = {
-      id: '',
-      name: '',
-      email: ''
-    }
-    this.row.push(obj)
+  addRow(index) {
+    let permission: IPermission = { name: '', action: '', url: '' };
+    this.roles[index].permissions.push(permission);
   }
 
-  deleteRow(x) {
+  addRole() {
+    let tempRole: IRoles = { id: '', name: 'tpl', permissions: [] };
+    let tempPerm: IPermission = { name: '', action: '', url: '' };
+    tempRole.permissions.push(tempPerm);
+    this.roles.push(tempRole);
+  }
+
+  async deleteRow(x, index) {
     var delBtn = confirm(" Do you want to delete ?");
     if (delBtn == true) {
-      this.row.splice(x, 1);
+      this.roles[index].permissions.splice(x, 1);
+      await this.rolesService.createOrUpdate(this.roles[index].id, this.roles[index])
     }
   }
+
+  async updateRow(index) {
+    await this.rolesService.createOrUpdate(this.roles[index].id, this.roles[index])
+  }
+}
+
+export interface IRoles {
+  id: string,
+  name: string;
+  permissions: IPermission[];
+}
+export interface IPermission {
+  name: string;
+  action: string;
+  url: string;
 }

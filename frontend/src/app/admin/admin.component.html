@@ -1,16 +1,48 @@
-<table class="style">
-    <tr>
-        <th>Role Name</th>
-        <th>Permission Name</th>
-        <th>Action</th>
-        <th>Url</th>
-        <th></th>
-    </tr>
-    <tr *ngFor="let item of row; let i = index">
-        <td><input type="text"></td>
-        <td><input type="text"></td>
-        <td><input type="text"></td>
-        <td><input type="text"></td>
-        <td> <button (click)="deleteRow(i)"><i class="fa fa-trash"></i></button></td>
-    </tr>
-</table>
+<select name="cars" id="cars">
+    <option *ngFor="let title of routes" [value]="title">
+        {{title}}
+    </option>
+</select>
+
+
+
+<div *ngFor="let role of roles; let r = index">
+    <input type="text" class="form-control" [(ngModel)]="role.name" [disabled]="!role.isEditable" />
+    <button (click)="role.isEditable=!role.isEditable" *ngIf="!role.isEditable">Edit</button>
+    <button *ngIf="role.isEditable" (click)="updateRow(r);role.isEditable=!role.isEditable">Save</button>
+    <table class="style">
+        <tr>
+            <th>Permission Name</th>
+            <th>Action</th>
+            <th>Url</th>
+            <th></th>
+        </tr>
+
+        <tr *ngFor="let perm of role.permissions; let i = index">
+            <td>
+                <input type="text" class="form-control" [(ngModel)]="perm.name" [disabled]="!perm.isEditable" />
+            </td>
+            <td>
+                <input type="text" class="form-control" [(ngModel)]="perm.action" [disabled]="!perm.isEditable" />
+            </td>
+            <td>
+                <input type="text" class="form-control" [(ngModel)]="perm.url" [disabled]="!perm.isEditable" />
+            </td>
+            <td>
+                <button (click)="perm.isEditable=!perm.isEditable" *ngIf="!perm.isEditable">Edit</button>
+                <button *ngIf="perm.isEditable" (click)="updateRow(r);perm.isEditable=!perm.isEditable">Save</button>
+                <button (click)="deleteRow(i,r)"><i class="fa fa-trash"></i></button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="d-flex justify-content-end div-btn">
+                    <button style="width: 150px;" (click)="addRow(r)">Add Row</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="d-flex justify-content-end div-btn">
+    <button style="width: 150px;" (click)="addRole()">Add Role</button>
+</div>

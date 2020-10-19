@@ -60,8 +60,8 @@ exports.register = (req, res) => {
 
 exports.login = (req, res, next) => {
     passport.authenticate('local', {
-        successRedirect: '/home',
-        failureRedirect: '/',
+        successRedirect: '/dashboard',
+        failureRedirect: '/home',
     })(req, res, next);
 }
 

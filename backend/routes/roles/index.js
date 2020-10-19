@@ -1,10 +1,13 @@
-const express = require('express');
-const router = express.Router();
-
 const roles = require('./routes');
 const mw = require('../middleware')
 
-router.post('/', mw.checkPermissions, roles.create);
-router.get('/', mw.checkPermissions, roles.getAll);
+module.exports = function (router) {
 
-module.exports = router;
+    router.post('/roles', mw.checkPermissions, roles.create);
+    router.get('/roles', mw.checkPermissions, roles.getAll);
+    router.get('/roles/:id', mw.checkPermissions, roles.getById);
+    router.put('/roles/:id', mw.checkPermissions, roles.update);
+    router.delete('/roles/:id', mw.checkPermissions, roles.delete);
+
+    return router;
+}

@@ -3,11 +3,15 @@
     /* font-family : inherit; */
     border-collapse: collapse;
     width: 100%;
+    margin-top: 10px;
+  }
+  .div-btn{
+    margin-top: 20px;
+    margin-right: 20px;
   }
   
   .style td, .style th {
     border: 1px solid #ddd;
-    padding: 8px;
   }
   
   .style tr:nth-child(even)
@@ -17,27 +21,32 @@
   {background-color: #ddd;}
   
   .style th {
-    padding-top: 12px;
-    padding-bottom: 12px;
     text-align: center;
-    background-color: orchid;
+    background-color:rgb(127, 127, 127);
     color: white;
+  }
+  h1{
+    text-align: center;
   }
   
   input {
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
+    padding: 15px 15px;
+    margin: 10px 0;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
   }
+
+  td{
+    text-align: center;
+  }
   
-  button {
-    width: 50%;
+  .style button {
+    width: 30%;
+    margin:10px 10px;
     padding: 12px 20px ;
-    margin: 0  25% 0 ;  
     display: inline-block;
     border: 1px solid #ccc; 
     border-radius: 4px;
