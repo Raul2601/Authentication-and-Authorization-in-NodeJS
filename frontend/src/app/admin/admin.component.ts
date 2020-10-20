@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RoleService } from '../role.service';
-import { RouteService } from '../route.service';
+import { RoleService } from './roles/role.service';
 
 @Component({
   selector: 'app-admin',
@@ -9,11 +8,9 @@ import { RouteService } from '../route.service';
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private rolesService: RoleService, private routeService: RouteService) { }
+  constructor(private rolesService: RoleService) { }
 
   roles: IRoles[] = [];
-
-  routes: string[] = [];
 
   ngOnInit(): void {
 
@@ -26,10 +23,10 @@ export class AdminComponent implements OnInit {
             tempRole.id = role._id;
             tempRole.name = role.name;
             for (const perm of role.permissions) {
-              let tempPerm: IPermission = { name: '', action: '', url: '' };
+              let tempPerm: IPermission = { name: '', description: '', value: '' };
               tempPerm.name = perm.name;
-              tempPerm.action = perm.action;
-              tempPerm.url = perm.url;
+              tempPerm.description = perm.description;
+              tempPerm.value = perm.value;
               tempRole.permissions.push(tempPerm);
             }
             this.roles.push(tempRole);
@@ -37,28 +34,22 @@ export class AdminComponent implements OnInit {
         }
         else {
           let tempRole: IRoles = { id: '', name: 'hr', permissions: [] };
-          let tempPerm: IPermission = { name: '', action: '', url: '' };
+          let tempPerm: IPermission = { name: '', description: '', value: '' };
           tempRole.permissions.push(tempPerm);
           this.roles.push(tempRole);
         }
       });
 
-    this.routeService.getAllRoutes()
-      .then((data) => {
-        if (data['routes'].length > 0) {
-          this.routes = data['routes'];
-        }
-      })
   }
 
   addRow(index) {
-    let permission: IPermission = { name: '', action: '', url: '' };
+    let permission: IPermission = { name: '', description: '', value: '' };
     this.roles[index].permissions.push(permission);
   }
 
   addRole() {
     let tempRole: IRoles = { id: '', name: 'tpl', permissions: [] };
-    let tempPerm: IPermission = { name: '', action: '', url: '' };
+    let tempPerm: IPermission = { name: '', description: '', value: '' };
     tempRole.permissions.push(tempPerm);
     this.roles.push(tempRole);
   }
@@ -83,6 +74,6 @@ export interface IRoles {
 }
 export interface IPermission {
   name: string;
-  action: string;
-  url: string;
+  description: string;
+  value: string;
 }

@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DevelopmentServerHttpInterceptor } from './app-interceptor';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { DevelopmentServerHttpInterceptor } from './app-interceptor';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AdminModule,
     HttpClientModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: DevelopmentServerHttpInterceptor, multi: true }],

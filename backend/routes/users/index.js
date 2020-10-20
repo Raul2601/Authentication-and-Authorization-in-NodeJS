@@ -1,12 +1,9 @@
 const mw = require('../middleware')
 const users = require('./routes');
 
-module.exports = function (router) {
+module.exports = function (app) {
 
-    router.post('/users', mw.checkPermissions, users.create);
-    router.post('/users/register', users.register);
-    router.post('/users/login', users.login);
-    router.get('/users/logout', users.logout);
+    app.post('/users', mw.hasPermission(mw.permissions.UserCreate), users.create);
 
-    return router;
+    return app;
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Role } from './role'
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class RoleService {
 
   getAllRoles() {
     return new Promise((resolve, reject) => {
-      this.http.get<any[]>(`${this.API}/roles`).subscribe(data => {
+      this.http.get<Role[]>(`${this.API}/roles`).subscribe(data => {
         resolve(data);
       }, error => {
         reject(error);
@@ -22,7 +23,7 @@ export class RoleService {
 
   getRole(roleId) {
     return new Promise((resolve, reject) => {
-      this.http.get<any[]>(`${this.API}/roles/` + roleId).subscribe(data => {
+      this.http.get<Role>(`${this.API}/roles/` + roleId).subscribe(data => {
         resolve(data);
       }, error => {
         reject(error);

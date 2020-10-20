@@ -42,6 +42,7 @@ app.db = db;
 require('./routes/features/index')(app);
 require('./routes/roles/index')(app);
 require('./routes/users/index')(app);
+require('./routes/auth/index')(app);
 
 app.get('*', async (req, res) => {
   res.status(301).sendFile(path.resolve(__dirname, '../frontend/dist/frontend', 'index.html'));
@@ -52,3 +53,19 @@ const port = 3000
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
+
+
+function availableRoutes() {
+  return app._router.stack
+    .filter(r => r.route)
+    .map(r => {
+      return {
+        method: Object.keys(r.route.methods)[0].toUpperCase(),
+        path: r.route.path
+      };
+    });
+}
+
+console.log(JSON.stringify(availableRoutes(), null, 2));
+
+

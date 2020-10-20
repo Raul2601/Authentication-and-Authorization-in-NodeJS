@@ -1,0 +1,16 @@
+<div class="div-table">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Row</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let role of roles;let roleIndex=index;">
+                <td>{{roleIndex}}</td>
+                <td><a [routerLink]="['/viewRole',role._id]">{{role.name}}</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

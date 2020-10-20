@@ -1,13 +1,13 @@
 const roles = require('./routes');
 const mw = require('../middleware')
 
-module.exports = function (router) {
+module.exports = function (app) {
 
-    router.post('/roles', mw.checkPermissions, roles.create);
-    router.get('/roles', mw.checkPermissions, roles.getAll);
-    router.get('/roles/:id', mw.checkPermissions, roles.getById);
-    router.put('/roles/:id', mw.checkPermissions, roles.update);
-    router.delete('/roles/:id', mw.checkPermissions, roles.delete);
+    app.post('/roles', mw.hasPermission(mw.permissions.RoleCreate), roles.create);
+    app.get('/roles', mw.hasPermission(mw.permissions.RoleRead), roles.getAll);
+    app.get('/roles/:id', mw.hasPermission(mw.permissions.RoleRead), roles.getById);
+    app.put('/roles/:id', mw.hasPermission(mw.permissions.RoleUpdate), roles.update);
+    app.delete('/roles/:id', mw.hasPermission(mw.permissions.RoleDelete), roles.delete);
 
-    return router;
+    return app;
 }
