@@ -46,8 +46,8 @@ function seedRoles() {
             permissions: [
                 {
                     name: 'RoleRead',
-                    Description: 'Can read roles',
-                    Value: 0
+                    description: 'Can read roles',
+                    value: 0
                 },
                 {
                     name: 'UserRead',
@@ -78,8 +78,8 @@ function seedRoles() {
             permissions: [
                 {
                     name: 'RoleRead',
-                    Description: 'Can read roles',
-                    Value: 0
+                    description: 'Can read roles',
+                    value: 0
                 },
                 {
                     name: 'RoleUpdate',

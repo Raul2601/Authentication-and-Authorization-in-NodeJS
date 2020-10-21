@@ -35,7 +35,7 @@ exports.hasPermission = (perm) => {
     return async (req, res, next) => {
         if (req.session !== null) {
             if (req.session.passport == null || req.session.passport.user == null) {
-                res.status(404).redirect('/login');
+                res.status(404).redirect('/');
             }
             else {
                 if (perm) {

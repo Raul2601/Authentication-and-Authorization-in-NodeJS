@@ -52,7 +52,7 @@ exports.register = async (req, res) => {
 exports.login = (req, res, next) => {
     passport.authenticate('local', {
         successRedirect: '/dashboard',
-        failureRedirect: '/home',
+        failureRedirect: '/',
     })(req, res, next);
 }
 
