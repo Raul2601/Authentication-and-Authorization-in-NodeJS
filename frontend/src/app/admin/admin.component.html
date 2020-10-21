@@ -15,12 +15,6 @@
     </div>
 </nav>
 
-<!-- <select name="cars" id="cars">
-    <option *ngFor="let title of routes" [value]="title">
-        {{title}}
-    </option>
-</select> -->
-
 <div *ngFor="let role of roles; let r = index">
     <input type="text" class="form-control" [(ngModel)]="role.name" [disabled]="!role.isEditable" />
     <button (click)="role.isEditable=!role.isEditable" *ngIf="!role.isEditable">Edit</button>

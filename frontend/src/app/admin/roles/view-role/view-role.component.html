@@ -1,35 +1,40 @@
-<h1>{{role.name}}</h1>
+<div class="container">
+    <h1>{{role.name}}</h1>
 
-<div class="d-flex justify-content-end div-btn">
-    <button style="width: 150px;" (click)="addRow()">Add Row</button>
-</div>
-<div class="div-table">
-    <table class="style">
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Value</th>
-            <th></th>
-        </tr>
+    <div class="d-flex justify-content-end div-btn">
+        <button class="btn btn-primary" type="button" (click)="addRow()">Add Row</button>
+    </div>
+    <div class="div-table">
+        <table class="style">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Value</th>
+                <th></th>
+            </tr>
 
-        <tr *ngFor="let perm of role.permissions; let i = index">
-            <td>
-                <input type="text" class="form-control" [(ngModel)]="perm.name" [disabled]="!perm.isEditable" />
-            </td>
-            <td>
-                <input type="text" class="form-control" [(ngModel)]="perm.description" [disabled]="!perm.isEditable" />
-            </td>
-            <td>
-                <input type="text" class="form-control" [(ngModel)]="perm.value" [disabled]="!perm.isEditable" />
-            </td>
-            <td>
-                <button (click)="perm.isEditable=!perm.isEditable" *ngIf="!perm.isEditable">Edit</button>
-                <button *ngIf="perm.isEditable" (click)="updateRow();perm.isEditable=!perm.isEditable">Save</button>
-                <button (click)="deleteRow(i)"><i class="fa fa-trash"></i></button>
-            </td>
-        </tr>
-    </table>
-</div>
-<div class="d-flex justify-content-end div-btn">
-    <a routerLink="/admin"><button style="width: 150px;">Back to Roles</button></a>
+            <tr *ngFor="let perm of role.permissions; let i = index">
+                <td>
+                    <input type="text" class="form-control" [(ngModel)]="perm.name" [disabled]="!perm.isEditable" />
+                </td>
+                <td>
+                    <input type="text" class="form-control" [(ngModel)]="perm.description"
+                        [disabled]="!perm.isEditable" />
+                </td>
+                <td>
+                    <input type="text" class="form-control" [(ngModel)]="perm.value" [disabled]="!perm.isEditable" />
+                </td>
+                <td>
+                    <button class="btn btn-warning" (click)="perm.isEditable=!perm.isEditable"
+                        *ngIf="!perm.isEditable">Edit</button>
+                    <button class="btn btn-warning" *ngIf="perm.isEditable"
+                        (click)="updateRow();perm.isEditable=!perm.isEditable">Save</button>
+                    <button class="btn btn-danger" (click)="deleteRow(i)"><i class="fa fa-trash"></i></button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="d-flex justify-content-end div-btn">
+        <a routerLink="/admin"><button class="btn btn-secondary" type="button">Back to Roles</button></a>
+    </div>
 </div>

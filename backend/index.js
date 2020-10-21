@@ -38,6 +38,17 @@ var db = mongoose.connection;
 db.set('debug', true);
 app.db = db;
 
+// seed Database
+
+var seeder = require('./seeder/seedDatabase');
+seeder.seedDatabase()
+  .then(() => {
+    console.log('Database successfully seeded');
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+
 // Routes
 require('./routes/features/index')(app);
 require('./routes/roles/index')(app);

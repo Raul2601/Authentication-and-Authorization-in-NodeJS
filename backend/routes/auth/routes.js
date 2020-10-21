@@ -2,8 +2,9 @@ const bcrypt = require('bcryptjs')
 const passport = require('passport')
 
 var User = require('../../models/User');
+var Role = require('../../models/Role');
 
-exports.register = (req, res) => {
+exports.register = async (req, res) => {
     const { name, email, username, pass1, pass2 } = req.body;
 
     if (!name || !email || !username || !pass1 || !pass2) {
@@ -15,6 +16,7 @@ exports.register = (req, res) => {
         res.status(401).send({ message: 'Passwords do not match!' });
         return;
     }
+    var userRole = await Role.findOne({ name: 'user' }).exec();
 
     User.findOne({ email: email })
         .then((user) => {
@@ -25,6 +27,7 @@ exports.register = (req, res) => {
                 const newUser = new User({
                     name: name,
                     email: email,
+                    role: userRole
                 });
 
                 // hash pass
