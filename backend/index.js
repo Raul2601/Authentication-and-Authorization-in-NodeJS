@@ -54,6 +54,7 @@ require('./routes/features/index')(app);
 require('./routes/roles/index')(app);
 require('./routes/users/index')(app);
 require('./routes/auth/index')(app);
+require('./routes/permissions/index')(app);
 
 app.get('*', async (req, res) => {
   res.status(301).sendFile(path.resolve(__dirname, '../frontend/dist/frontend', 'index.html'));

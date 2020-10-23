@@ -1,5 +1,6 @@
 const Role = require('../models/Role');
 var User = require('../models/User')
+var Permissions = require('../models/Permission')
 
 exports.checkPermissions = async (req, res, next) => {
     return next();
@@ -76,14 +77,15 @@ exports.permissions = {
 
 
 async function findUser(userId) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         User.findById(userId)
             .populate({
-                path: 'role', model: Role
+                path: 'role', model: Role,
+                populate: { path: 'permissions', model: Permissions }
             })
             .exec((err, user) => {
                 if (err) {
-                    res.status(404).send({ error: 'Not found' });
+                    reject({ error: 'Not found' });
                 }
                 else {
                     resolve(user);

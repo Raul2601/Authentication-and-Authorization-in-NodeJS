@@ -2,19 +2,19 @@
     margin-top: 10%
 }
 
-.role-div{
+.permission-div{
     margin: 0px 20%;
 }
 
-.role-name{
+.permission-name{
     background-color: #e1d8d8;
 }
 
-.role-atributes{
+.permission-atributes{
     margin: 3% 0%;
 }
 
-.role-atributes p{
+.permission-atributes p{
     font-size: 16px;
 }
 
@@ -22,7 +22,7 @@
     margin-left: 10px;
 }
 
-.role-values{
+.permission-values{
     margin-bottom: 10px;margin-left: 50px;
 }
 
@@ -30,8 +30,9 @@ button{
     margin: 0px 3px;
 }
 
-.btn-edit{
-    width: 50px;color: rgb(0,0,0);
+.btn-save{
+    width: 60px;
+    color: rgb(0,0,0);
 }
 
 .btn-remove{

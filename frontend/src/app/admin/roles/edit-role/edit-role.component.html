@@ -1,0 +1,17 @@
+<div class="container container-div">
+    <div class="border rounded-0 role-div">
+        <h1 class="text-center role-name">Edit Role</h1>
+        <div class="d-flex flex-row justify-content-center role-atributes">
+            <div class="d-flex flex-column align-items-end">
+                <p><strong>Name:</strong></p>
+            </div>
+            <div class="name">
+                <input type="text" class="form-control" [(ngModel)]="role.name" />
+            </div>
+        </div>
+        <div class="role-values">
+            <a [routerLink]="['/admin/viewRole', role._id]"><button class="btn border rounded-0" type="button">Back to
+                    Role</button></a>
+            <button class="btn btn-success btn-edit" type="button">Save</button>
+        </div>
+    </div>

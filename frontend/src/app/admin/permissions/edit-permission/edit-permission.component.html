@@ -1,0 +1,21 @@
+<div class="container container-div">
+    <div class="border rounded-0 permission-div">
+        <h1 class="text-center permission-name">Edit Permission</h1>
+        <div class="d-flex flex-row justify-content-center permission-atributes">
+            <div class="d-flex flex-column align-items-end">
+                <p><strong>Name:</strong></p>
+                <p><strong>Description:</strong></p>
+                <p><strong>Value:</strong></p>
+            </div>
+            <div class="name">
+                <input type="text" class="form-control" [(ngModel)]="permission.name" />
+                <input type="text" class="form-control" [(ngModel)]="permission.description" />
+                <input type="text" class="form-control" [(ngModel)]="permission.value" />
+            </div>
+        </div>
+        <div class="permission-values">
+            <a routerLink="/admin/permissions"><button class="btn border rounded-0" type="button">Back to
+                    Permissions</button></a>
+            <button class="btn btn-success btn-edit" type="button" (click)="save()">Save</button>
+        </div>
+    </div>

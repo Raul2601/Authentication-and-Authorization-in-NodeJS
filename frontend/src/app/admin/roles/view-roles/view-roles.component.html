@@ -9,7 +9,7 @@
         <tbody>
             <tr *ngFor="let role of roles;let roleIndex=index;">
                 <td>{{roleIndex}}</td>
-                <td><a [routerLink]="['/viewRole',role._id]">{{role.name}}</a></td>
+                <td><a [routerLink]="['/admin/viewRole',role._id]">{{role.name}}</a></td>
             </tr>
         </tbody>
     </table>

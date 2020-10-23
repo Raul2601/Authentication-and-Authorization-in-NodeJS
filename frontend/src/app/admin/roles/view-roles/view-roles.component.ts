@@ -14,7 +14,7 @@ export class ViewRolesComponent implements OnInit {
   roles: Role[] = [];
 
   ngOnInit(): void {
-    this.rolesService.getAllRoles()
+    this.rolesService.getAll()
       .then((data: Role[]) => {
         if (data['roles'].length > 0) {
           this.roles = data['roles']

@@ -1,60 +1,55 @@
 const Permission = require('../../models/Permission');
-var Role = require('../../models/Role')
 
 exports.create = function (req, res) {
-    var role = new Role(req.body);
-    role.save((err) => {
+    var permission = new Permission(req.body);
+    permission.save((err) => {
         if (err) {
             res.status(401).send({ error: err.message });
         }
         else {
-            res.status(200).send({ role: role });
+            res.status(200).send({ permission: permission });
         }
     })
 }
 
 exports.getAll = function (req, res) {
-    Role.find({})
-        .populate({
-            path: 'permissions', model: Permission
-        })
-        .exec((err, roles) => {
+    Permission.find({})
+        .exec((err, permissions) => {
             if (err) {
                 res.status(401).send({ error: err.message });
             }
             else {
-                res.status(200).send({ roles: roles });
+                res.status(200).send({ permissions: permissions });
             }
         })
 }
 
 exports.getById = function (req, res) {
     const id = req.params.id;
-    Role.findById(id)
-        .populate({
-            path: 'permissions', model: Permission
-        })
-        .exec((err, role) => {
+    Permission.findById(id)
+        .exec((err, permission) => {
             if (err) {
                 return res.status(401).send({ error: err.message });
             }
-            res.status(200).send({ role: role });
+            res.status(200).send({ permission: permission });
         })
 }
 
 exports.update = function (req, res) {
     const id = req.params.id;
-    const newRole = req.body;
+    const newPermission = req.body;
 
-    Role.findById(id, (err, role) => {
+    Permission.findById(id, (err, permission) => {
         if (err) {
             return res.status(401).send({ error: err.message });
         }
-        role.name = newRole.name;
-        role.permissions = newRole.permissions;
-        role.save()
+        permission.name = newPermission.name;
+        permission.description = newPermission.description;
+        permission.value = newPermission.value;
+
+        permission.save()
             .then(() => {
-                res.status(200).send({ role: role });
+                res.status(200).send({ permission: permission });
             })
             .catch((err) => {
                 res.status(401).send({ error: err.message });
@@ -65,7 +60,7 @@ exports.update = function (req, res) {
 exports.delete = function (req, res) {
     const id = req.params.id;
 
-    Role.findByIdAndDelete(id, (err) => {
+    Permission.findByIdAndDelete(id, (err) => {
         if (err) {
             res.status(401).send({ error: err.message });
         }

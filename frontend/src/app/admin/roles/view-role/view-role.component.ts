@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RoleService } from 'src/app/admin/roles/role.service';
-import { Role, Permission } from '../role';
-import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { EMPTY } from 'rxjs';
+import { Role } from '../role';
+import { Permission } from '../../permissions/permission'
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-view-role',
@@ -11,21 +11,21 @@ import { EMPTY } from 'rxjs';
 })
 export class ViewRoleComponent implements OnInit {
 
-  constructor(private rolesService: RoleService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private rolesService: RoleService, private route: ActivatedRoute) { }
 
   role: Role;
 
   ngOnInit(): void {
     let roleId = this.route.snapshot.paramMap.get('id');
 
-    this.rolesService.getRole(roleId)
+    this.rolesService.getById(roleId)
       .then((data: Role) => {
         this.role = data['role']
       });
   }
 
   addRow() {
-    let permission: Permission = { name: '', description: '', value: null };
+    let permission: Permission = { _id: '', name: '', description: '', value: null };
     this.role.permissions.push(permission);
   }
 

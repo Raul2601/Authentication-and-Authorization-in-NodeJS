@@ -14,7 +14,7 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.rolesService.getAllRoles()
+    this.rolesService.getAll()
       .then((data) => {
 
         if (data['roles'].length > 0) {

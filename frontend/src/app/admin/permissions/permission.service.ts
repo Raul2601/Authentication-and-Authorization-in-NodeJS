@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Role } from './role'
+import { Permission } from './permission';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RoleService {
+export class PermissionService {
 
   API = 'http://localhost:3000';
 
@@ -13,7 +13,7 @@ export class RoleService {
 
   getAll() {
     return new Promise((resolve, reject) => {
-      this.http.get<Role[]>(`${this.API}/roles`).subscribe(data => {
+      this.http.get<Permission[]>(`${this.API}/permissions`).subscribe(data => {
         resolve(data);
       }, error => {
         reject(error);
@@ -21,9 +21,9 @@ export class RoleService {
     });
   }
 
-  getById(roleId) {
+  getById(permissionId) {
     return new Promise((resolve, reject) => {
-      this.http.get<Role>(`${this.API}/roles/` + roleId).subscribe(data => {
+      this.http.get<Permission>(`${this.API}/permissions/` + permissionId).subscribe(data => {
         resolve(data);
       }, error => {
         reject(error);
@@ -31,17 +31,17 @@ export class RoleService {
     });
   }
 
-  createOrUpdate(roleId, newRole) {
+  createOrUpdate(permissionId, permission) {
     return new Promise(async (resolve, reject) => {
-      if (roleId == "" || await this.getById(roleId) == null) {
-        this.http.post(`${this.API}/roles`, newRole).subscribe(() => {
+      if (permissionId == null || permissionId == "" || await this.getById(permissionId) == null) {
+        this.http.post(`${this.API}/permissions`, permission).subscribe(() => {
           resolve();
         }, err => {
           reject(err);
         });
       }
       else {
-        this.http.put(`${this.API}/roles/` + roleId, newRole).subscribe(() => {
+        this.http.put(`${this.API}/permissions/` + permissionId, permission).subscribe(() => {
           resolve();
         }, err => {
           reject(err);
@@ -50,9 +50,9 @@ export class RoleService {
     });
   }
 
-  delete(roleId) {
+  delete(permissionId) {
     return new Promise((resolve, reject) => {
-      this.http.delete(`${this.API}/roles/` + roleId).subscribe(() => {
+      this.http.delete(`${this.API}/permissions/` + permissionId).subscribe(() => {
         resolve();
       }, err => {
         reject(err);
