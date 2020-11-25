@@ -13,13 +13,18 @@ export class ViewRolesComponent implements OnInit {
 
   roles: Role[] = [];
 
+  displayedColumns: string[] = ['position', 'name'];
+  dataSource: any;
+
   ngOnInit(): void {
     this.rolesService.getAll()
       .then((data: Role[]) => {
         if (data['roles'].length > 0) {
-          this.roles = data['roles']
+          this.roles = data['roles'];
+          this.dataSource = this.roles;
         }
       });
   }
 
 }
+

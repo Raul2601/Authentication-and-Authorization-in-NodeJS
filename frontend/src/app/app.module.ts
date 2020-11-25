@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DevelopmentServerHttpInterceptor } from './app-interceptor';
 import { AdminModule } from './admin/admin.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { AdminModule } from './admin/admin.module';
     AppRoutingModule,
     AdminModule,
     HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: DevelopmentServerHttpInterceptor, multi: true }],
   bootstrap: [AppComponent]
