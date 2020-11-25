@@ -11,10 +11,11 @@ import { EditRoleComponent } from './roles/edit-role/edit-role.component';
 import { EditPermissionComponent } from './permissions/edit-permission/edit-permission.component';
 
 
-import { MaterialModule } from '../shared/material.module'
+import { MaterialModule } from '../shared/material.module';
+import { ViewUsersComponent } from './users/view-users/view-users.component'
 
 @NgModule({
-  declarations: [AdminComponent, ViewRoleComponent, ViewRolesComponent, ViewPermissionsComponent, EditRoleComponent, EditPermissionComponent],
+  declarations: [AdminComponent, ViewRoleComponent, ViewRolesComponent, ViewPermissionsComponent, EditRoleComponent, EditPermissionComponent, ViewUsersComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

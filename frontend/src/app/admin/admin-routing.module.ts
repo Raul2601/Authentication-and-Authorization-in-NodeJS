@@ -7,25 +7,34 @@ import { ViewPermissionsComponent } from './permissions/view-permissions/view-pe
 import { EditRoleComponent } from './roles/edit-role/edit-role.component';
 import { ViewRoleComponent } from './roles/view-role/view-role.component';
 import { ViewRolesComponent } from './roles/view-roles/view-roles.component';
-
+import { ViewUsersComponent } from './users/view-users/view-users.component';
 const routes: Routes = [
   {
     path: '', component: AdminComponent,
     children: [
       {
-        path: 'roles', component: ViewRolesComponent
+        path: 'roles',
+        component: ViewRolesComponent
       },
       {
-        path: 'viewRole/:id', component: ViewRoleComponent
+        path: 'viewRole/:id',
+        component: ViewRoleComponent
       },
       {
-        path: 'editRole/:id', component: EditRoleComponent
+        path: 'editRole/:id',
+        component: EditRoleComponent
       },
       {
-        path: 'editPermission/:id', component: EditPermissionComponent
+        path: 'editPermission/:id',
+        component: EditPermissionComponent
       },
       {
-        path: 'permissions', component: ViewPermissionsComponent
+        path: 'permissions',
+        component: ViewPermissionsComponent
+      },
+      {
+        path: 'users',
+        component: ViewUsersComponent
       }
     ]
   },
